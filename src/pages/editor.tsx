@@ -1,5 +1,6 @@
 import * as React from 'react'
 import styled from 'styled-components'
+import { useStateWithStorage } from '../hooks/use_state_with_storage'
 
 const { useState } = React
 
@@ -45,8 +46,10 @@ const Preview = styled.div`
   width: 50vw;
 `
 
+const StorageKey = 'pages/editor:text'
+
 export const Editor: React.FC = () => {
-  const [text, setText] = useState<string>('')
+  const [text, setText] = useStateWithStorage('', StorageKey)
 
   return (
     <>
