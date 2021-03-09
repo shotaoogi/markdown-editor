@@ -22,8 +22,11 @@ export const putMemo = async (title: string, text: string): Promise<void> => {
   const datetime = new Date().toISOString()
   await memos.put({ datetime, title, text })
 }
-export const getMemos = ():Promise<MemoRecord[]> => {
+export const getMemos = (page: number):Promise<MemoRecord[]> => {
+  const offset = (page -1) * NUM_PER_PAGE
   return memos.orderBy('datetime')
         .reverse()
+        .offset(offset)
+        .limit(NUM_PER_PAGE)
         .toArray()
 }
